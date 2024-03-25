@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <header><h1 style="text-align: center; font-size: 60px;">Groupie Tracker</h1></header>
+    <body style="background: rgb(69, 69, 69);">
+        <style>
+
+            .flex-container {
+            padding-top: 1em;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            row-gap: 3em;
+            flex-direction: row;
+            align-items: center;
+            position: relative;
+            background-color: rgb(69, 69, 69);
+            text-align: justify;
+            font-size: 20px;
+
+            }
+           .tooltip {
+            position: relative;
+            display: inline-block;
+
+            }
+            .tooltip .tooltiptext {
+            visibility: hidden;
+
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+
+            /* Position the tooltip */
+            width: 300px;
+            top: 0%;
+            left: 50%;
+            margin-left: -150px;
+            position: absolute;
+            z-index: 1;
+            }
+            .tooltip:hover .tooltiptext {
+            visibility: visible;
+            }
+
+            img {
+                border-radius: 5%;
+            }
+        </style>
+
+        
+        <div class="flex-container">
+            {{ range .}}
+            <div class="tooltip"><img src={{ .Image }} style="width: 300px; height: 300px;">
+                <span class="tooltiptext">
+                    {{ .Name }} <br><br> 
+                    Members:<br> {{ range .Members }} {{.}}<br>{{end}}<br> 
+                    Creation: {{ .CreationDate }} <br><br> 
+                    First album: {{ .FirstAlbum }} <br><br> 
+                    Concerts:<br> {{ range $Locations, $Dates := .DatesLocations  }} 
+                    {{$Locations}}:  <br>
+                    {{range $Dates}}{{.}}<br> {{end}}
+                    {{ end}}</span><br>
+            <h4 style="text-align: center;">{{ .Name }}</h4></div>
+            <!-- <div class="tooltip"><img src="content\members.png"  style="height: 20px; width: 30px;" alt="Members">
+                <span class="tooltiptext">{{ .Members }}</span></div>
+            <div class="tooltip">Start
+                <span class="tooltiptext">{{ .CreationDate }}</span></div>
+            <div class="tooltip">1.
+                <span class="tooltiptext">{{ .FirstAlbum }}</span></div>
+            <div  class="tooltip"><img src="content\calendar.png"  style="height: 25px; width: 30px;" alt="Concerts">
+                <span class="tooltiptext">{{ .DatesLocations }}</span></div> -->
+            {{ end }}
+          </div>
+          
+    </body>
+</html>
